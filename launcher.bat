@@ -60,7 +60,7 @@ if "%lineChoice%"=="a" (
     echo 全ての行の内容を実行します:
     
     for /l %%N in (1, 1, %lineNumber%) do (
-        set "lineContent=!line[%%N]!"
+        set "lineContent=start /b !line[%%N]!"
         echo 実行中: !lineContent!
         call !lineContent!
     )
@@ -76,7 +76,7 @@ if !selectedLine! gtr !lineNumber! (
     goto :EOF
 )
 
-set "selectedLineContent=!line[%selectedLine%]!"
+set "selectedLineContent=start /b !line[%selectedLine%]!"
 echo 選択された行の内容: !selectedLineContent!
 
 echo 実行中: !selectedLineContent!
@@ -84,3 +84,6 @@ call !selectedLineContent!
 
 goto :EOF
 
+:EOF
+
+exit /0
