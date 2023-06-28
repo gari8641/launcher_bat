@@ -58,9 +58,12 @@ for /f "usebackq delims=" %%L in ("%folder%\%selectedFileName%") do (
 
 ::if "%lineChoice%"=="a" (
     echo 全ての行の内容を実行します:
+
+    set /a lineNumber=%lineNumber%-1
+
     
     for /l %%N in (1, 1, %lineNumber%) do (
-        set "lineContent=start /b !line[%%N]!"
+        set "lineContent=start /b "" !line[%%N]!"
         echo 実行中: !lineContent!
         call !lineContent!
     )
