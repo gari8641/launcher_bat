@@ -36,27 +36,27 @@ echo 無効な番号が入力されました。
 goto :EOF
 
 :ProcessFile
-::echo 選択されたファイル: %selectedFileName%
-::echo ファイルの内容:
-::echo -----------------------------
-::
+echo 選択されたファイル: %selectedFileName%
+echo ファイルの内容:
+echo -----------------------------
+
 set "lineNumber=1"
-::
+
 for /f "usebackq delims=" %%L in ("%folder%\%selectedFileName%") do (
     echo !lineNumber!. %%L
     set "line[!lineNumber!]=%%L"
     set /a "lineNumber+=1"
 )
 
-::echo -----------------------------
-::set /p "lineChoice=表示された行の番号を入力してください (a: 全ての行を実行, 空エンターで終了): "
+echo -----------------------------
+set /p "lineChoice=表示された行の番号を入力してください (a: 全ての行を実行, 空エンターで終了): "
 
-::if "%lineChoice%"=="" (
-::    echo 空エンターが入力されたため、バッチファイルを終了します。
-::    exit /b
-::)
+if "%lineChoice%"=="" (
+    echo 空エンターが入力されたため、バッチファイルを終了します。
+    exit /b
+)
 
-::if "%lineChoice%"=="a" (
+if "%lineChoice%"=="a" (
     echo 全ての行の内容を実行します:
     
     for /l %%N in (1, 1, %lineNumber%) do (
@@ -67,20 +67,20 @@ for /f "usebackq delims=" %%L in ("%folder%\%selectedFileName%") do (
 
     echo 全ての行の実行が完了しました。
     goto :EOF
-::)
+)
 
-::set /a "selectedLine=lineChoice"
+set /a "selectedLine=lineChoice"
 
-::if !selectedLine! gtr !lineNumber! (
-::    echo 無効な番号が入力されました。
-::    goto :EOF
-::)
-::
-::set "selectedLineContent=start /b !line[%selectedLine%]!"
-::echo 選択された行の内容: !selectedLineContent!
-::
-::echo 実行中: !selectedLineContent!
-::call !selectedLineContent!
+if !selectedLine! gtr !lineNumber! (
+    echo 無効な番号が入力されました。
+    goto :EOF
+)
+
+set "selectedLineContent=start /b !line[%selectedLine%]!"
+echo 選択された行の内容: !selectedLineContent!
+
+echo 実行中: !selectedLineContent!
+call !selectedLineContent!
 
 goto :EOF
 
