@@ -1,5 +1,6 @@
 @echo off
 setlocal enabledelayedexpansion
+call variable.bat
 
 set "folder=%CD%"
 set "counter=1"
