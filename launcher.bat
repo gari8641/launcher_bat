@@ -27,8 +27,8 @@ echo o:フォルダを開く
 set /p "choice=ファイルの番号かコマンドを入力してください (空エンターで終了): "
 
 if "%choice%"=="" (
-    echo 空エンターが入力されたため、バッチファイルを終了します。
-    exit /b
+    echo 空エンターが入力されました。
+    goto EOF
 )
 
 if "%choice%"=="" goto EDIT
@@ -66,6 +66,9 @@ start /b "" gvim %DATE_PREFIX%_%FILE_NAME%.txt
 exit
 
 :EDIT
+cls
+set choice=
+echo ▼編集
 set count=0
 for %%f in (*.txt) do (
 set /a count+=1
@@ -73,10 +76,15 @@ set file[!count!]=%%f
 echo !count!. %%f
 )
 set /p choice=番号を入力してください:
+if "%choice%"=="" (
+    echo 空エンターが入力されました。
+    goto EOF
+)
+
 start /b "" gvim "!file[%choice%]!"
 endlocal
 
-exit
+goto EOF
 
 :DELETE
 
@@ -102,16 +110,13 @@ for %%F in (*.txt) do (
     set /a fileCount+=1
 )
 
-echo 無効な番号が入力されました。プログラムを終了します。
-
-
-exit
+  echo 無効な番号が入力されました。
+  goto EOF
 
 :OPEN
 
-start /b C:\portable_soft\launcher
-
-exit
+  start /b C:\portable_soft\launcher
+  goto EOF
 
 
 
@@ -169,5 +174,5 @@ for /f "usebackq delims=" %%L in ("%folder%\%selectedFileName%") do (
 goto :EOF
 
 :EOF
-
-exit /0
+  echo バッチファイルを終了します。
+  exit /0
