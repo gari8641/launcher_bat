@@ -1,11 +1,17 @@
 @echo off
+chcp 65001 >nul
+
+:START
+cls
+set choice=
+
 setlocal enabledelayedexpansion
 call variable.bat
 
 set "folder=%CD%"
 set "counter=1"
 
-echo ƒtƒ@ƒCƒ‹ˆê——:
+echo ãƒ•ã‚¡ã‚¤ãƒ«ä¸€è¦§:
 echo -----------------------------
 
 for %%F in ("%folder%\*.txt") do (
@@ -16,18 +22,18 @@ for %%F in ("%folder%\*.txt") do (
 
 echo -----------------------------
 
-echo n:V‹Kì¬
-echo e:•ÒW
-echo d:íœ
-echo o:ƒtƒHƒ‹ƒ_‚ğŠJ‚­
+echo n:æ–°è¦ä½œæˆ
+echo e:ç·¨é›†
+echo d:å‰Šé™¤
+echo o:ãƒ•ã‚©ãƒ«ãƒ€ã‚’é–‹ã
 
 
 
 
-set /p "choice=ƒtƒ@ƒCƒ‹‚Ì”Ô†‚©ƒRƒ}ƒ“ƒh‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢ (‹óƒGƒ“ƒ^[‚ÅI—¹): "
+set /p "choice=ãƒ•ã‚¡ã‚¤ãƒ«ã®ç•ªå·ã‹ã‚³ãƒãƒ³ãƒ‰ã‚’å…¥åŠ›ã—ã¦ãã ã•ã„ (ç©ºã‚¨ãƒ³ã‚¿ãƒ¼ã§çµ‚äº†): "
 
 if "%choice%"=="" (
-    echo ‹óƒGƒ“ƒ^[‚ª“ü—Í‚³‚ê‚Ü‚µ‚½B
+    echo ç©ºã‚¨ãƒ³ã‚¿ãƒ¼ãŒå…¥åŠ›ã•ã‚Œã¾ã—ãŸã€‚
     goto EOF
 )
 
@@ -48,7 +54,7 @@ for %%F in ("%folder%\*.txt") do (
     set /a "fileNumber+=1"
 )
 
-echo –³Œø‚È”Ô†‚ª“ü—Í‚³‚ê‚Ü‚µ‚½B
+echo ç„¡åŠ¹ãªç•ªå·ãŒå…¥åŠ›ã•ã‚Œã¾ã—ãŸã€‚
 goto :EOF
 
 
@@ -68,16 +74,16 @@ exit
 :EDIT
 cls
 set choice=
-echo ¥•ÒW
+echo â–¼ç·¨é›†
 set count=0
 for %%f in (*.txt) do (
 set /a count+=1
 set file[!count!]=%%f
 echo !count!. %%f
 )
-set /p choice=”Ô†‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢:
+set /p choice=ç•ªå·ã‚’å…¥åŠ›ã—ã¦ãã ã•ã„:
 if "%choice%"=="" (
-    echo ‹óƒGƒ“ƒ^[‚ª“ü—Í‚³‚ê‚Ü‚µ‚½B
+    echo ç©ºã‚¨ãƒ³ã‚¿ãƒ¼ãŒå…¥åŠ›ã•ã‚Œã¾ã—ãŸã€‚
     goto EOF
 )
 
@@ -90,89 +96,104 @@ goto EOF
 
 setlocal enabledelayedexpansion
 
-REM ƒJƒŒƒ“ƒgƒfƒBƒŒƒNƒgƒŠ‚É‚ ‚éŠg’£q‚ªtxt‚Ìƒtƒ@ƒCƒ‹ˆê——‚ğ•\¦‚·‚é
+REM ã‚«ãƒ¬ãƒ³ãƒˆãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã«ã‚ã‚‹æ‹¡å¼µå­ãŒtxtã®ãƒ•ã‚¡ã‚¤ãƒ«ä¸€è¦§ã‚’è¡¨ç¤ºã™ã‚‹
 set /a count=1
 for %%F in (*.txt) do (
     echo !count!. %%F
     set /a count+=1
 )
 
-REM ”Ô†‚ğ‘I‘ğ‚µ‚Äƒtƒ@ƒCƒ‹‚ğ‘I‘ğ‚µAƒSƒ~” ‚ÉˆÚ“®‚·‚é
-set /p choice=ˆÚ“®‚·‚éƒtƒ@ƒCƒ‹‚Ì”Ô†‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢: 
+REM ç•ªå·ã‚’é¸æŠã—ã¦ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é¸æŠã—ã€ã‚´ãƒŸç®±ã«ç§»å‹•ã™ã‚‹
+set /p choice=ç§»å‹•ã™ã‚‹ãƒ•ã‚¡ã‚¤ãƒ«ã®ç•ªå·ã‚’å…¥åŠ›ã—ã¦ãã ã•ã„: 
 set /a fileCount=1
 for %%F in (*.txt) do (
     if !fileCount! equ %choice% (
-        echo ƒtƒ@ƒCƒ‹ "%%F" ‚ğDownloads‚ÉˆÚ“®‚µ‚Ü‚·...
+        echo ãƒ•ã‚¡ã‚¤ãƒ« "%%F" ã‚’Downloadsã«ç§»å‹•ã—ã¾ã™...
         move "%%F" C:\Users\bpc_m\Downloads\
-        echo ƒtƒ@ƒCƒ‹‚ÌˆÚ“®‚ªŠ®—¹‚µ‚Ü‚µ‚½B
-        exit /b
+        echo ãƒ•ã‚¡ã‚¤ãƒ«ã®ç§»å‹•ãŒå®Œäº†ã—ã¾ã—ãŸã€‚
+        goto START
     )
     set /a fileCount+=1
 )
 
-  echo –³Œø‚È”Ô†‚ª“ü—Í‚³‚ê‚Ü‚µ‚½B
+  echo ç„¡åŠ¹ãªç•ªå·ãŒå…¥åŠ›ã•ã‚Œã¾ã—ãŸã€‚
   goto EOF
 
 :OPEN
 
-  start /b C:\portable_soft\launcher
+  start /b /max C:\portable_soft\launcher
   goto EOF
 
 
 
 
 :ProcessFile
-::echo ‘I‘ğ‚³‚ê‚½ƒtƒ@ƒCƒ‹: %selectedFileName%
-::echo ƒtƒ@ƒCƒ‹‚Ì“à—e:
+::echo é¸æŠã•ã‚ŒãŸãƒ•ã‚¡ã‚¤ãƒ«: %selectedFileName%
+::echo ãƒ•ã‚¡ã‚¤ãƒ«ã®å†…å®¹:
 ::echo -----------------------------
 ::
 set "lineNumber=1"
+set "sourceFile=%folder%\%selectedFileName%"
+set "decodedFile=%temp%\launcher_decoded_%random%_%random%.txt"
+set "LAUNCHER_SOURCE_FILE=%sourceFile%"
+set "LAUNCHER_DECODED_FILE=%decodedFile%"
+powershell -NoProfile -ExecutionPolicy Bypass -Command ^
+  "$src=$env:LAUNCHER_SOURCE_FILE; $dst=$env:LAUNCHER_DECODED_FILE; " ^
+  "$bytes=[System.IO.File]::ReadAllBytes($src); " ^
+  "$utf8Strict=New-Object System.Text.UTF8Encoding($false,$true); " ^
+  "try { $text=$utf8Strict.GetString($bytes) } catch { $text=[System.Text.Encoding]::GetEncoding(932).GetString($bytes) }; " ^
+  "[System.IO.File]::WriteAllText($dst,$text,[System.Text.UTF8Encoding]::new($false))"
+if errorlevel 1 (
+    echo ãƒ•ã‚¡ã‚¤ãƒ«èª­ã¿å–ã‚Šã«å¤±æ•—ã—ã¾ã—ãŸ: %selectedFileName%
+    goto EOF
+)
 ::
-for /f "usebackq delims=" %%L in ("%folder%\%selectedFileName%") do (
+for /f "usebackq delims=" %%L in ("%decodedFile%") do (
     echo !lineNumber!. %%L
     set "line[!lineNumber!]=%%L"
     set /a "lineNumber+=1"
 )
+del /q "%decodedFile%" >nul 2>&1
 
 ::echo -----------------------------
-::set /p "lineChoice=•\¦‚³‚ê‚½s‚Ì”Ô†‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢ (a: ‘S‚Ä‚Ìs‚ğÀs, ‹óƒGƒ“ƒ^[‚ÅI—¹): "
+::set /p "lineChoice=è¡¨ç¤ºã•ã‚ŒãŸè¡Œã®ç•ªå·ã‚’å…¥åŠ›ã—ã¦ãã ã•ã„ (a: å…¨ã¦ã®è¡Œã‚’å®Ÿè¡Œ, ç©ºã‚¨ãƒ³ã‚¿ãƒ¼ã§çµ‚äº†): "
 
 ::if "%lineChoice%"=="" (
-::    echo ‹óƒGƒ“ƒ^[‚ª“ü—Í‚³‚ê‚½‚½‚ßAƒoƒbƒ`ƒtƒ@ƒCƒ‹‚ğI—¹‚µ‚Ü‚·B
+::    echo ç©ºã‚¨ãƒ³ã‚¿ãƒ¼ãŒå…¥åŠ›ã•ã‚ŒãŸãŸã‚ã€ãƒãƒƒãƒãƒ•ã‚¡ã‚¤ãƒ«ã‚’çµ‚äº†ã—ã¾ã™ã€‚
 ::    exit /b
 ::)
 
 ::if "%lineChoice%"=="a" (
-    echo ‘S‚Ä‚Ìs‚Ì“à—e‚ğÀs‚µ‚Ü‚·:
+    echo å…¨ã¦ã®è¡Œã®å†…å®¹ã‚’å®Ÿè¡Œã—ã¾ã™:
 
     set /a lineNumber=%lineNumber%-1
 
     
     for /l %%N in (1, 1, %lineNumber%) do (
-        set "lineContent=start /b "" !line[%%N]!"
-        echo Às’†: !lineContent!
+        set "lineContent=start /b /max "" !line[%%N]!"
+        echo å®Ÿè¡Œä¸­: !lineContent!
         call !lineContent!
     )
 
-    echo ‘S‚Ä‚Ìs‚ÌÀs‚ªŠ®—¹‚µ‚Ü‚µ‚½B
-    goto :EOF
+    echo å…¨ã¦ã®è¡Œã®å®Ÿè¡ŒãŒå®Œäº†ã—ã¾ã—ãŸã€‚
+    goto EOF
 ::)
 
 ::set /a "selectedLine=lineChoice"
 
 ::if !selectedLine! gtr !lineNumber! (
-::    echo –³Œø‚È”Ô†‚ª“ü—Í‚³‚ê‚Ü‚µ‚½B
+::    echo ç„¡åŠ¹ãªç•ªå·ãŒå…¥åŠ›ã•ã‚Œã¾ã—ãŸã€‚
 ::    goto :EOF
 ::)
 ::
 ::set "selectedLineContent=start /b !line[%selectedLine%]!"
-::echo ‘I‘ğ‚³‚ê‚½s‚Ì“à—e: !selectedLineContent!
+::echo é¸æŠã•ã‚ŒãŸè¡Œã®å†…å®¹: !selectedLineContent!
 ::
-::echo Às’†: !selectedLineContent!
+::echo å®Ÿè¡Œä¸­: !selectedLineContent!
 ::call !selectedLineContent!
 
-goto :EOF
+goto EOF
 
 :EOF
-  echo ƒoƒbƒ`ƒtƒ@ƒCƒ‹‚ğI—¹‚µ‚Ü‚·B
+  echo ãƒãƒƒãƒãƒ•ã‚¡ã‚¤ãƒ«ã‚’çµ‚äº†ã—ã¾ã™ã€‚
   exit /0
